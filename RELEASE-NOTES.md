@@ -1,5 +1,5 @@
-Dares E-mail 2FA 1.2.1
+Dares E-mail 2FA 1.2.2
 
-- Leesbare labels, tekst, invoervelden en knoppen bij thema-conflicten.
-- Automatische contrastcorrectie voor tekst, links en knoppen.
+- Directe contrastveilige opmaak voor veldnamen van de registratiepagina.
+- Voorkomt donkere labels door conflicterende themaregels en WebKit-tekstkleur.
 - Bestaande instellingen blijven behouden.

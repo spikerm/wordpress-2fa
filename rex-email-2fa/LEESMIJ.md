@@ -1,4 +1,4 @@
-# Dares E-mail 2FA 1.2.1
+# Dares E-mail 2FA 1.2.2
 
 Een WordPress-plugin voor wachtwoordlogin gevolgd door een eenmalige e-mailcode.
 Nederlandse, donkere inlogkaart via `[rex_login]`; ook de gewone WordPress-login
@@ -217,3 +217,6 @@ Voor beheerders van de repository: verhoog `Version` in het hoofdpluginbestand, 
 
 ## 1.2.1: leesbare tekst
 Tekst, labels, velden en knoppen krijgen expliciete kleuren om conflicten met het thema te beperken. Te weinig contrast in de huisstijl wordt automatisch gecorrigeerd bij weergave; opgeslagen kleuren blijven behouden.
+
+## 1.2.2: veldnamen registratie
+Registratielabels krijgen rechtstreeks contrastveilige kleuren en leesbare lettergrootte, inclusief WebKit-tekstkleur, zodat themaregels de veldnamen niet donker maken.
