@@ -1,4 +1,4 @@
-# Dares E-mail 2FA 1.2.3
+# Dares E-mail 2FA 1.2.4
 
 Een WordPress-plugin voor wachtwoordlogin gevolgd door een eenmalige e-mailcode.
 Nederlandse, donkere inlogkaart via `[rex_login]`; ook de gewone WordPress-login

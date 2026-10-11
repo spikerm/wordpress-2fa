@@ -1,4 +1,3 @@
-Dares E-mail 2FA 1.2.3
+Dares E-mail 2FA 1.2.4
 
-- Registratieveldnamen donkerblauw met lichte achtergrond voor duidelijk contrast.
-- Vaste labelkleuren hebben voorrang op thema- en huisstijlkleuren.
+- Registratieveld Naam hernoemd naar Gebruikersnaam (callsign).
