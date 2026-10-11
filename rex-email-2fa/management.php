@@ -112,9 +112,43 @@ final class Dares_2FA_Management {
         if (!empty($opts['brand_title'])) { $html.='<p style="text-align:center;font-weight:700">'.esc_html($opts['brand_title']).'</p>'; }
         return $html;
     }
+    public static function contrast_ratio($a, $b) {
+        $lum = function($hex) {
+            $hex = ltrim($hex, '#');
+            if (strlen($hex) === 3) { $hex = $hex[0].$hex[0].$hex[1].$hex[1].$hex[2].$hex[2]; }
+            $values = [];
+            foreach ([0, 2, 4] as $offset) {
+                $v = hexdec(substr($hex, $offset, 2)) / 255;
+                $values[] = $v <= 0.04045 ? $v / 12.92 : pow(($v + 0.055) / 1.055, 2.4);
+            }
+            return 0.2126*$values[0] + 0.7152*$values[1] + 0.0722*$values[2];
+        };
+        $x=$lum($a); $y=$lum($b);
+        return (max($x,$y)+0.05)/(min($x,$y)+0.05);
+    }
+    public static function readable_color($preferred, $background) {
+        if (self::contrast_ratio($preferred, $background) >= 4.5) { return $preferred; }
+        return self::contrast_ratio('#ffffff', $background) >= self::contrast_ratio('#000000', $background) ? '#ffffff' : '#000000';
+    }
     public function brand_styles() {
-        $opts=$this->opts();$accent=sanitize_hex_color($opts['accent']??'') ?: '#38bdf8';$background=sanitize_hex_color($opts['background']??'') ?: '#111c2e';$text=sanitize_hex_color($opts['text']??'') ?: '#e8eef8';
-        echo '<style>.rex2fa-card,.rex-invite{background:'.esc_attr($background).'!important;color:'.esc_attr($text).'!important}.rex2fa-card h2,.rex-invite h2,.rex2fa-card p,.rex-invite p,.rex2fa-card small{color:'.esc_attr($text).'!important}.rex2fa-card button:not(.secondary),.rex-invite button{background:'.esc_attr($accent).'!important}.rex2fa-card a,.rex-invite a{color:'.esc_attr($accent).'!important}</style>';
+        $opts=$this->opts();
+        $accent=sanitize_hex_color($opts['accent']??'') ?: '#38bdf8';
+        $background=sanitize_hex_color($opts['background']??'') ?: '#111c2e';
+        $text=self::readable_color(sanitize_hex_color($opts['text']??'') ?: '#e8eef8', $background);
+        $button=self::readable_color('#062133', $accent);
+        $link=self::readable_color($accent, $background);
+        $css='';
+        foreach (['.rex2fa-card','.rex-invite'] as $card) {
+            $css.=$card.'{background:'.$background.'!important;color:'.$text.'!important}';
+            foreach (['h2','p','small','label','legend','span'] as $element) { $css.=$card.' '.$element.'{color:'.$text.'!important;opacity:1!important}'; }
+            $css.=$card.' input:not([type=checkbox]),'.$card.' select,'.$card.' textarea{background:#081321!important;color:#ffffff!important;-webkit-text-fill-color:#ffffff!important;opacity:1!important}';
+            $css.=$card.' input::placeholder,'.$card.' textarea::placeholder{color:#b5c6dd!important;opacity:1!important}';
+            $css.=$card.' button{background:'.$accent.'!important;color:'.$button.'!important;opacity:1!important}';
+            $css.=$card.' button.secondary{background:#20334b!important;color:#ffffff!important}';
+            $css.=$card.' a{color:'.$link.'!important;text-decoration:underline}';
+            foreach (['.notice','.message'] as $notice) { $css.=$card.' '.$notice.'{background:'.$background.'!important;color:'.$text.'!important;border:1px solid '.$text.'}'; }
+        }
+        echo '<style>'.$css.'</style>';
     }
     public function save_tools() {
         $this->check('dares2fa_tools');$opts=$this->opts();$templates=[];

@@ -1,4 +1,4 @@
-# Dares E-mail 2FA 1.2.0
+# Dares E-mail 2FA 1.2.1
 
 Een WordPress-plugin voor wachtwoordlogin gevolgd door een eenmalige e-mailcode.
 Nederlandse, donkere inlogkaart via `[rex_login]`; ook de gewone WordPress-login
@@ -214,3 +214,6 @@ beoordeeld. Actieve uitnodigingen moeten eerst worden ingetrokken.
 - Broncode en releases: https://github.com/spikerm/wordpress-2fa. WordPress controleert publieke releases en biedt nieuwere versies aan als plugin-update. Alleen de meegeleverde release-ZIP met de vaste pluginmap is geschikt. GitHub hoeft geen toegang tot je WordPress-site te krijgen.
 
 Voor beheerders van de repository: verhoog `Version` in het hoofdpluginbestand, werk RELEASE-NOTES.md bij en commit naar main. GitHub Actions controleert PHP-syntax, maakt de ZIP en publiceert eenmaal per versienummer een release. Bestaande releases worden niet overschreven.
+
+## 1.2.1: leesbare tekst
+Tekst, labels, velden en knoppen krijgen expliciete kleuren om conflicten met het thema te beperken. Te weinig contrast in de huisstijl wordt automatisch gecorrigeerd bij weergave; opgeslagen kleuren blijven behouden.

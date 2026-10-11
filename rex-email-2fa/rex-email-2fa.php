@@ -4,7 +4,7 @@
  * Description: Nederlandse inlogpagina, e-mailcodes, uitnodigingen en accountgoedkeuring voor WordPress.
  * Plugin URI: https://github.com/spikerm/wordpress-2fa
  * Update URI: https://github.com/spikerm/wordpress-2fa
- * Version: 1.2.0
+ * Version: 1.2.1
  * Author: Rex Markesteijn
  * Requires at least: 6.2
  * Requires PHP: 7.4
@@ -388,7 +388,7 @@ final class Rex_Email_2FA {
         if (!current_user_can('manage_options')) { return; } $opts=$this->opts(); ?>
         <div class="wrap"><h1>Dares E-mail 2FA</h1>
         <?php if ($this->query('rex_message')): ?><div class="notice notice-info"><p><?php echo esc_html($this->query('rex_message')); ?></p></div><?php endif; ?>
-        <p>Versie 1.2.0 · Eenmalige codes van 6 cijfers · 5 minuten geldig · Maximaal 5 pogingen · HTTPS verplicht</p>
+        <p>Versie 1.2.1 · Eenmalige codes van 6 cijfers · 5 minuten geldig · Maximaal 5 pogingen · HTTPS verplicht</p>
         <div class="notice notice-warning inline"><p><strong>Wordfence:</strong> schakel Wordfence-2FA uit voor gebruikers die deze e-mailverificatie gaan gebruiken en zet verplichte Wordfence-2FA voor die rollen uit. De firewall en scans blijven actief. Test reCAPTCHA apart met de eigen inlogpagina.</p></div>
         <p>Begin met een testmail en een testgebruiker. Houd je huidige beheerderssessie open tijdens de eerste inlogtest. Bestaande sessies worden niet uitgelogd.</p>
         <form method="post" action="<?php echo esc_url(admin_url('admin-post.php')); ?>"><?php wp_nonce_field('rex2fa_test'); ?><input type="hidden" name="action" value="rex2fa_test"><button class="button">Testmail naar mijn account versturen</button></form>
