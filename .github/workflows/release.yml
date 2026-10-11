@@ -1,0 +1,30 @@
+name: Plugin release
+on:
+  push:
+    branches: [main]
+    paths: ['rex-email-2fa/**', '.github/workflows/release.yml']
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: plugin-release
+  cancel-in-progress: false
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: PHP syntax
+        run: find rex-email-2fa -name '*.php' -print0 | xargs -0 -n1 php -l
+      - name: Build and publish version
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          VERSION=$(sed -n 's/^ \* Version: //p' rex-email-2fa/rex-email-2fa.php)
+          [[ "$VERSION" =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]]
+          if gh release view "v$VERSION" >/dev/null 2>&1; then
+            echo "Release v$VERSION bestaat al; verhoog de pluginversie voor een nieuwe release."
+            exit 0
+          fi
+          zip -r "Dares-Email-2FA-v$VERSION.zip" rex-email-2fa
+          gh release create "v$VERSION" "Dares-Email-2FA-v$VERSION.zip" --target "$GITHUB_SHA" --title "Dares E-mail 2FA $VERSION" --notes-file RELEASE-NOTES.md
