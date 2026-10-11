@@ -172,11 +172,8 @@ final class Rex_2FA_Invitations {
         return true;
     }
     private function card($title,$text,$html='') {
-        // Inline styles also win against theme rules with !important on labels.
-        $opts = $GLOBALS['dares2fa_management']->opts();
-        $background = sanitize_hex_color($opts['background'] ?? '') ?: '#111c2e';
-        $text_color = Dares_2FA_Management::readable_color(sanitize_hex_color($opts['text'] ?? '') ?: '#e8eef8', $background);
-        $label_style = 'color:'.$text_color.'!important;-webkit-text-fill-color:'.$text_color.'!important;opacity:1!important;visibility:visible!important;text-shadow:none!important;font-size:16px!important;font-weight:600!important;line-height:1.5!important;';
+        // Dark registration labels on a light surface, independent of theme colors.
+        $label_style = 'display:block!important;color:#10243a!important;-webkit-text-fill-color:#10243a!important;background:#f1f5f9!important;padding:6px 10px!important;border-radius:5px!important;opacity:1!important;visibility:visible!important;text-shadow:none!important;font-size:16px!important;font-weight:600!important;line-height:1.5!important;';
         $html = str_replace('<label ', '<label style="'.esc_attr($label_style).'" ', $html);
         return '<style>.rex-invite{box-sizing:border-box;max-width:480px;margin:25px auto;padding:28px;border:1px solid #304563;border-radius:16px;background:#111c2e;color:#e8eef8;font:16px/1.5 system-ui}.rex-invite h2{color:#fff}.rex-invite label{display:block;margin:14px 0 5px}.rex-invite input{box-sizing:border-box;width:100%;padding:11px;border-radius:8px;border:1px solid #50637e;background:#081321;color:#fff;font:inherit}.rex-invite button{padding:12px 18px;background:#38bdf8;border:0;border-radius:8px;color:#062133;font-weight:700;cursor:pointer;margin-top:20px}.rex-invite a{color:#7dd3fc}.rex-invite .message{padding:12px;background:#223751;margin:14px 0}</style><div class="rex-invite">'.$GLOBALS['dares2fa_management']->brand_header().'<h2>'.esc_html($title).'</h2><p>'.esc_html($text).'</p>'.$html.'</div>';
     }

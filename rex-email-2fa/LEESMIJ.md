@@ -1,4 +1,4 @@
-# Dares E-mail 2FA 1.2.2
+# Dares E-mail 2FA 1.2.3
 
 Een WordPress-plugin voor wachtwoordlogin gevolgd door een eenmalige e-mailcode.
 Nederlandse, donkere inlogkaart via `[rex_login]`; ook de gewone WordPress-login
@@ -220,3 +220,6 @@ Tekst, labels, velden en knoppen krijgen expliciete kleuren om conflicten met he
 
 ## 1.2.2: veldnamen registratie
 Registratielabels krijgen rechtstreeks contrastveilige kleuren en leesbare lettergrootte, inclusief WebKit-tekstkleur, zodat themaregels de veldnamen niet donker maken.
+
+## 1.2.3: donkere veldnamen
+Veldnamen op de registratiepagina zijn donkerblauw (#10243a), met een lichte achtergrond (#f1f5f9). Deze vaste labelkleuren hebben voorrang op de huisstijl en het thema.
